@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content col-span-7">
     <main>
         <header>
             <div class="direction">

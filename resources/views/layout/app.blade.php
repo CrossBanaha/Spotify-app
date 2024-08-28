@@ -9,9 +9,9 @@
         <title>@yield('title', 'Spotify')</title>
     </head>
     <body>
-        <div class="flex">
+        <div class=" grid grid-cols-8 gap-x-7">
             @include('layout.sidebar')
             @yield('content')
-        </div>s
+        </div>
     </body>
 </html>
