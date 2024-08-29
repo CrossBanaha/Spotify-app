@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Author extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'nickname',
+        'url'
+    ];
+    public function songs(){
+        return $this->hasMany(Song::class);
+    }
 }
