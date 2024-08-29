@@ -12,6 +12,6 @@
         <div class="flex">
             @include('layout.sidebar')
             @yield('content')
-        </div>s
+        </div>
     </body>
 </html>
