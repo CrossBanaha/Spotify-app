@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Author;
+use App\Models\Genre;
 
 return new class extends Migration
 {
@@ -18,8 +20,8 @@ return new class extends Migration
             $table->string('description',60)->nullable();
             $table->date('premiere');
             $table->time('duration',3);
-            $table->foreignId('author_id')->constrained();
-            $table->foreignId('genre_id')->constrained();
+            $table->foreignIdFor(Author::class)->constrained()->onDelete('cascade');
+            //$table->foreignIdFor(Genre::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

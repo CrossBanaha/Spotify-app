@@ -6,8 +6,14 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        'custom-layout': 'auto 2fr auto',
+      },
+      colors:{
+        customBase: 'rgb(18, 18, 18)',
+      }
+    },
   },
   plugins: [],
 }
-

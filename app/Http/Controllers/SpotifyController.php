@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Spotify;
+use App\Models\Author;
 use App\Http\Requests\StoreSpotifyRequest;
 use App\Http\Requests\UpdateSpotifyRequest;
 
@@ -14,7 +15,8 @@ class SpotifyController extends Controller
     public function index()
     {
         $spotify = Spotify::all();
-        return view('spotifys.index', compact('spotify'));
+        $authors = Author::all();
+        return view('spotifys.index', compact('spotify','authors'));
     }
 
     /**

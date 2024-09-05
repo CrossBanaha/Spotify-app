@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Song extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'url',
+        'title',
+        'description',
+        'premiere',
+        'duration',
+        'author_id',
+        ];
+    public function author(){
+        return $this->belongsTo(Author::class);
+    }
+    public function genres(){
+        return $this->belongsToMany(Genre::class);
+    }
 }
