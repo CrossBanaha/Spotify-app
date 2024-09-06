@@ -12,7 +12,7 @@
         </button>
         <div class="mini-box">
             <h1>Create your first list</h1>
-            <button class="Create-list">Crear lista</button>
+            <button class="Create-list">create</button>
         </div>
     </div>
 </div>

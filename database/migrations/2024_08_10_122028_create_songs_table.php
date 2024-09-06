@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\Author;
 use App\Models\Genre;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('songs', function (Blueprint $table) {
@@ -21,16 +17,10 @@ return new class extends Migration
             $table->date('premiere');
             $table->time('duration',3);
             $table->foreignIdFor(Author::class)->constrained()->onDelete('cascade');
-            //$table->foreignIdFor(Genre::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
+    public function down(): void {
         Schema::dropIfExists('songs');
     }
 };

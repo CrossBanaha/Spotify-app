@@ -11,8 +11,9 @@
             </div>
         </header>
         <section class="mb-8">
-            <h2 class="text-2xl mb-4">Popular Artist</h2>
-            <div class="flex space-x-4">
+            <h2 class="text-2xl mb-4">Popular Artists</h2>
+            <button id="add" class="addAuthor" onclick="openModal()">add author</button>
+            <div class="grid grid-cols-10 gap-4">
                 @foreach($authors as $author)
                     <div class="text-center">
                         <img src="{{ asset($author->url) }}" alt="{{ $author->nickname }}" class="rounded-full h-24 w-24 mx-auto mb-2">
@@ -22,15 +23,17 @@
                 @endforeach
             </div>
         </section>
-        <section>
-            <h2 class="text-2xl mb-4">Álbumes populares</h2>
-            <div class="grid grid-cols-5 gap-4">
-                <!-- Repite este bloque para cada álbum -->
-                <div class="text-center">
-                    <img src="/path-to-album.jpg" alt="Album Name" class="h-24 w-24 mx-auto mb-2">
-                    <p>Album Name</p>
-                </div>
-                <!-- Fin del bloque del álbum -->
+        <section class="mb-8">
+            <h2 class="text-2xl mb-4">Popular Songs</h2>
+            <button id="add" class="addSong" onclick="openModal()">add song</button>
+            <div class="grid grid-cols-10 gap-4">
+                @foreach($songs as $song)
+                    <div class="text-center">
+                        <img src="{{ asset($song->url) }}" alt="{{ $song->title }}" class="rounded-full h-24 w-24 mx-auto mb-2">
+                        <p>{{ $song->title }}</p>
+                        <p>Artist</p>
+                    </div>
+                @endforeach
             </div>
         </section>
     </main>

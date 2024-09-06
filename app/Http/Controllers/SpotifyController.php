@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Spotify;
 use App\Models\Author;
+use App\Models\Song;
 use App\Http\Requests\StoreSpotifyRequest;
 use App\Http\Requests\UpdateSpotifyRequest;
+use Illuminate\Http\Request;
 
 class SpotifyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $spotify = Spotify::all();
         $authors = Author::all();
-        return view('spotifys.index', compact('spotify','authors'));
+        $songs = Song::all();
+        return view('spotifys.index', compact('spotify','authors','songs'));
     }
 
     /**
@@ -25,6 +25,21 @@ class SpotifyController extends Controller
     public function create()
     {
         //
+    }
+    public function createAuthor(Request $request){
+        $validatedData = $request->validate([
+            'nickname' => 'required|string|max:30'
+        ]);
+        Author::create($validatedData);
+        return redirect()->route('spotifys.index')->with('success', 'Author created successfully!');
+    }
+    public function createSong(Request $request){
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:30',
+            'description' => 'required|string|max:60'
+        ]);
+        Song::create($validatedData);
+        return redirect()->route('spotifys.index')->with('success', 'Song created successfully!');
     }
 
     /**
