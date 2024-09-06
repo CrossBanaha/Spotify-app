@@ -28,7 +28,8 @@ class SpotifyController extends Controller
     }
     public function createAuthor(Request $request){
         $validatedData = $request->validate([
-            'nickname' => 'required|string|max:30'
+            'nickname' => 'required|string|max:30',
+            'url' => 'required|string|max:255'
         ]);
         Author::create($validatedData);
         return redirect()->route('spotifys.index')->with('success', 'Author created successfully!');
@@ -36,7 +37,11 @@ class SpotifyController extends Controller
     public function createSong(Request $request){
         $validatedData = $request->validate([
             'title' => 'required|string|max:30',
-            'description' => 'required|string|max:60'
+            'description' => 'required|string|max:60',
+            'premiere' => 'required|date',
+            'duration' => 'required|date_format:H:i:s',
+            'author_id' => 'required|exists:authors,id',
+            'url' => 'required|string|max:255'
         ]);
         Song::create($validatedData);
         return redirect()->route('spotifys.index')->with('success', 'Song created successfully!');

@@ -64,3 +64,6 @@ body {
 #add:hover {
     background: linear-gradient(84deg, rgba(117,255,0,1) 0%, rgba(0,255,116,1) 22%, rgba(193,0,255,1) 100%);
 }
+.Modal {
+    @apply bg-customBase text-white p-6 rounded-lg shadow-lg w-1/3 m-auto;
+}
