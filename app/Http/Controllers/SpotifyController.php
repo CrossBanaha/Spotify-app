@@ -34,6 +34,23 @@ class SpotifyController extends Controller
         Author::create($validatedData);
         return redirect()->route('spotifys.index')->with('success', 'Author created successfully!');
     }
+    public function getArtistSongs($id)
+    {
+        $author = Author::with('songs')->find($id);
+
+        if (!$author) {
+            return response()->json(['error' => 'Author not found'], 404);
+        }
+
+        return response()->json([
+            'nickname' => $author->nickname,
+            'songs' => $author->songs
+        ]);
+    }
+    public function destroyAuthor(Author $author){
+        $author->delete();
+        return redirect()->route('spotifys.index')->with('success', 'Author deleted successfully!');
+    }
     public function createSong(Request $request){
         $validatedData = $request->validate([
             'title' => 'required|string|max:30',
