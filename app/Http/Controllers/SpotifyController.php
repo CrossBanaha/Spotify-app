@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Spotify;
 use App\Models\Author;
 use App\Models\Song;
+use App\Models\Genre;
 use App\Http\Requests\StoreSpotifyRequest;
 use App\Http\Requests\UpdateSpotifyRequest;
 use Illuminate\Http\Request;
@@ -16,77 +17,13 @@ class SpotifyController extends Controller
         $spotify = Spotify::all();
         $authors = Author::all();
         $songs = Song::all();
-        return view('spotifys.index', compact('spotify','authors','songs'));
+        $genres = Genre::all();
+        return view('spotifys.index', compact('spotify','authors','songs','genres'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
-    public function createAuthor(Request $request){
-        $validatedData = $request->validate([
-            'nickname' => 'required|string|max:30',
-            'url' => 'required|string|max:255'
-        ]);
-        Author::create($validatedData);
-        return redirect()->route('spotifys.index')->with('success', 'Author created successfully!');
-    }
-    public function getArtistSongs($id)
-    {
-        $author = Author::with('songs')->find($id);
-
-        if (!$author) {
-            return response()->json(['error' => 'Author not found'], 404);
-        }
-
-        return response()->json([
-            'nickname' => $author->nickname,
-            'songs' => $author->songs
-        ]);
-    }
-    public function editArtist($id) {
-        $author = Author::find($id);
-        if (!$author) {
-            return response()->json(['error' => 'Author not found'], 404);
-        }
-        return response()->json($author);
-    }
-    public function updateArtist(Request $request, $id) {
-        $validatedData = $request->validate([
-            'nickname' => 'required|string|max:30',
-            'url' => 'required|string|max:255'
-        ]);
-        $author = Author::find($id);
-        if (!$author) {
-            return redirect()->route('spotifys.index')->with('error', 'Author not found');
-        }
-        $author->update($validatedData);
-        return redirect()->route('spotifys.index')->with('success', 'Author updated successfully!');
-    }
-    public function deleteArtist($id) {
-        $author = Author::find($id);
-        if (!$author) {
-            return response()->json(['error' => 'Author not found'], 404);
-        }
-        $author->delete();
-        return response()->json(['success' => 'Author deleted successfully']);
-    }
-    public function createSong(Request $request){
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:30',
-            'description' => 'required|string|max:60',
-            'premiere' => 'required|date',
-            'duration' => 'required|date_format:H:i:s',
-            'author_id' => 'required|exists:authors,id',
-            'url' => 'required|string|max:255'
-        ]);
-        Song::create($validatedData);
-        return redirect()->route('spotifys.index')->with('success', 'Song created successfully!');
-    }
-
     /**
      * Store a newly created resource in storage.
      */

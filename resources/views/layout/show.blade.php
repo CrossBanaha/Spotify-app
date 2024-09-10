@@ -1,91 +1,93 @@
-<div id="artistModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
+<!--this is for author show-->
+<div id="sAuthorModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
     <div class="Modal">
-        <h2 id="artistName" class="text-xl font-bold mb-4"></h2>
+        <h2 id="authorName" class="text-xl font-bold mb-4"></h2>
         <h1 class="font-bold">Canciones relacionadas</h1>
-        <ul id="artistSongs"></ul>
+        <ul id="authorSongs"></ul>
         <div class="flex justify-end mt-6">
-        <button class="Cancel" onclick="closeArtistModal()">Close</button>
-        <button class="Add" onclick="openEditModal()">Edit</button>
-        <button class="Add" onclick="deleteArtist()">Delete</button>    
+            <button class="Cancel" onclick="closeSAuthorModal()">Close</button>
+            <button class="Add" onclick="openEditModal()">Edit</button>
+            <button class="Add" onclick="deleteArtist()">Delete</button>    
         </div>
     </div>
 </div>
-<!-- Modal para editar el artista -->
-<div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
+<!--this is for song show-->
+<div id="sSongModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
     <div class="Modal">
-        <form id="editArtistForm" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="mb-4">
-                <label for="nickname" class="block text-sm font-medium">Nickname</label>
-                <input type="text" id="editNickname" name="nickname" value="{{old('nickname')}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="mb-4">
-                <label for="url" class="block text-sm font-medium">Image URL</label>
-                <input type="text" id="editUrl" name="url" value="{{old('url')}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="flex justify-between">
-                <button type="submit" class="Add">Save Changes</button>
-                <button type="button" class="Cancel" onclick="closeEditModal()">Cancel</button>
-            </div>
-        </form>
+        <h2 id="songTitle" class="text-xl font-bold mb-4"></h2>
+        <p id="songDescription"></p>
+        <p id="songPremiere"></p>
+        <p id="songDuration"></p>
+        <p id="songAuthor"></p>
+        <h3 class="font-bold">Genres:</h3>
+        <ul id="songGenres"></ul>
+        <div class="flex justify-end mt-6">
+            <button class="Cancel" onclick="closeSSongModal()">Close</button>
+        </div>
     </div>
 </div>
 <script>
-    let currentArtistId = null;
-    function showArtistModal(id) {
-        fetch(`/artists/${id}/songs`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('artistName').innerText = data.nickname;
-                let songsList = document.getElementById('artistSongs');
-                songsList.innerHTML = '';
-                data.songs.forEach(song => {
-                    let listItem = document.createElement('li');
-                    listItem.textContent = song.title;
-                    songsList.appendChild(listItem);
-                });
-                document.getElementById('artistModal').classList.remove('hidden');
+    //Function to show author details modal
+    function showSAuthorModal(id) {
+        fetch(`/authors/${id}/songs`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            document.getElementById('authorName').innerText = data.nickname;
+            let songsList = document.getElementById('authorSongs');
+            songsList.innerHTML = '';
+            data.songs.forEach(song => {
+                let listItem = document.createElement('li');
+                listItem.textContent = song.title;
+                songsList.appendChild(listItem);
             });
+            document.getElementById('sAuthorModal').classList.remove('hidden');
+        })
+        .catch(error => {
+            console.error('Error fetching artist data:', error);
+        });
     }
-    function closeArtistModal() {
-        document.getElementById('artistModal').classList.add('hidden');
+    function closeSAuthorModal() {
+        document.getElementById('sAuthorModal').classList.add('hidden');
     }
-    function openEditModal() {
-        // Llenar el formulario con los datos actuales del artista
-        fetch(`/artists/${currentArtistId}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('editNickname').value = data.nickname;
-                document.getElementById('editUrl').value = data.url;
-                document.getElementById('editArtistForm').action = `/artists/${currentArtistId}`;
-                document.getElementById('editModal').classList.remove('hidden');
+    // Function to show song details modal
+    function showSSongModal(id) {
+        fetch(`/songs/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            document.getElementById('songTitle').innerText = data.title;
+            document.getElementById('songDescription').innerText = data.description;
+            document.getElementById('songPremiere').innerText = `Premiere Date: ${data.premiere}`;
+            document.getElementById('songDuration').innerText = `Duration: ${data.duration}`;
+            document.getElementById('songAuthor').innerText = `Author: ${data.author.nickname}`;
+            let genresList = document.getElementById('songGenres');
+            genresList.innerHTML = '';
+            data.genres.forEach(genre => {
+                let listItem = document.createElement('li');
+                listItem.textContent = genre.type;
+                genresList.appendChild(listItem);
             });
 
-        // Cerrar el modal de detalles
-        closeArtistModal();
+            document.getElementById('sSongModal').classList.remove('hidden');
+        })
+        .catch(error => {
+            console.error('Error fetching song data:', error);
+        });
     }
-
-    function closeEditModal() {
-        document.getElementById('editModal').classList.add('hidden');
+    function closeSSongModal() {
+        document.getElementById('sSongModal').classList.add('hidden');
     }
-
-    function deleteArtist() {
-        if (confirm('Are you sure you want to delete this artist?')) {
-            fetch(`/artists/${currentArtistId}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Artist deleted successfully!');
-                    location.reload();
-                } else {
-                    alert('There was a problem deleting the artist.');
-                }
-            });
+    window.onclick = function(event) {
+        const songModal = document.getElementById('sSongModal');
+        if (event.target === songModal) {
+            closeSSongModal();
         }
     }
 </script>

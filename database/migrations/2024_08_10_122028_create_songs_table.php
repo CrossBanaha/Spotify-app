@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('title',30);
             $table->string('description',60)->nullable();
             $table->date('premiere');
-            $table->time('duration',3);
+            $table->time('duration',2);
             $table->foreignIdFor(Author::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
