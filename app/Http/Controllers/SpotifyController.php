@@ -21,46 +21,15 @@ class SpotifyController extends Controller
         return view('spotifys.index', compact('spotify','authors','songs','genres'));
     }
     public function create()
-    {
-        //
-    }
-    /**
-     * Store a newly created resource in storage.
-     */
+    {}
     public function store(StoreSpotifyRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
+    {}
     public function show(Spotify $spotify)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    {}
     public function edit(Spotify $spotify)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    {}
     public function update(UpdateSpotifyRequest $request, Spotify $spotify)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    {}
     public function destroy(Spotify $spotify)
-    {
-        //
-    }
+    {}
 }

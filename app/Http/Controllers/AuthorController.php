@@ -42,6 +42,6 @@ class AuthorController extends Controller
     public function destroy(Author $author) //DELETE
     {
         $author->delete();
-        return response()->json(['success' => 'Author deleted successfully']);
+        return redirect()->route('spotifys.index')->with('success', 'Author deleted successfully!');
     }
 }

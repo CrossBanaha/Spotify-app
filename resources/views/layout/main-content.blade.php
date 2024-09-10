@@ -18,6 +18,14 @@
                     <div class="text-center">
                         <img src="{{$author->url}}" alt="{{ $author->nickname }}" class="rounded-full h-24 w-24 mx-auto mb-2" onclick="showSAuthorModal({{$author->id}})">
                         <p>{{ $author->nickname }}</p>
+                        <button id="edit-{{$author->id}}" class="Add" onclick="openAuthorModal({{$author->id}})">&#10000;</button>
+                        <form action="{{route('authors.destroy', $author -> id)}}" method="post" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="Add">
+                                &#8861;
+                            </button>
+                        </form>
                     </div>
                 @endforeach
             </div>
@@ -39,7 +47,7 @@
             <button id="add" class="addGenre" onclick="openGenreModal()">add genre</button>
             <div class="grid grid-cols-10 gap-4">
                 @foreach($genres as $genre)
-                    <div class="text-center">
+                    <div class="genresExpo">
                         <p>{{ $genre->type }}</p>
                     </div>
                 @endforeach

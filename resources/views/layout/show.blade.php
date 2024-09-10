@@ -6,8 +6,6 @@
         <ul id="authorSongs"></ul>
         <div class="flex justify-end mt-6">
             <button class="Cancel" onclick="closeSAuthorModal()">Close</button>
-            <button class="Add" onclick="openEditModal()">Edit</button>
-            <button class="Add" onclick="deleteArtist()">Delete</button>    
         </div>
     </div>
 </div>

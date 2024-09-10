@@ -8,13 +8,9 @@ use Illuminate\Http\Request;
 class SongController extends Controller
 {
     public function index() //GET
-    {
-        //
-    }
+    {}
     public function create() //GET
-    {
-        //
-    }
+    {}
     public function store(Request $request) //POST
     {
         $validatedData = $request->validate([
@@ -50,15 +46,9 @@ class SongController extends Controller
         ]);
     }
     public function edit(Song $song) //GET
-    {
-        //
-    }
+    {}
     public function update(Request $request, Song $song) //PUT, PATCH
-    {
-        //
-    }
+    {}
     public function destroy(Song $song) //DELETE
-    {
-        //
-    }
+    {}
 }
