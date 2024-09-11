@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\Route;
 Route::resource('spotifys',SpotifyController::class)->only('index');
 Route::resource('authors',AuthorController::class)->except(['index','create','edit']);
 Route::get('authors/{author}/songs', [AuthorController::class, 'show'])->name('authors.show');
-Route::resource('songs',SongController::class)->only(['store','show']);
+Route::resource('songs',SongController::class)->except(['index','create','edit']);
 Route::resource('genres',GenreController::class)->only('store');

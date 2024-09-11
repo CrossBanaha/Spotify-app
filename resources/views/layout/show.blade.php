@@ -13,10 +13,10 @@
 <div id="sSongModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
     <div class="Modal">
         <h2 id="songTitle" class="text-xl font-bold mb-4"></h2>
-        <p id="songDescription"></p>
-        <p id="songPremiere"></p>
-        <p id="songDuration"></p>
-        <p id="songAuthor"></p>
+        <h2 id="songDescription"></h2>
+        <h2 id="songPremiere"></h2>
+        <h2 id="songDuration"></h2>
+        <h2 id="songAuthor"></h2>
         <h3 class="font-bold">Genres:</h3>
         <ul id="songGenres"></ul>
         <div class="flex justify-end mt-6">
@@ -56,10 +56,6 @@
         fetch(`/songs/${id}`)
         .then(response => response.json())
         .then(data => {
-            if (data.error) {
-                alert(data.error);
-                return;
-            }
             document.getElementById('songTitle').innerText = data.title;
             document.getElementById('songDescription').innerText = data.description;
             document.getElementById('songPremiere').innerText = `Premiere Date: ${data.premiere}`;

@@ -30,25 +30,30 @@ class SongController extends Controller
     public function show(Song $song) //GET
     {
         $song = $song->load('author', 'genres');
-        return response()->json([
-            'title' => $song->title,
-            'description' => $song->description,
-            'premiere' => $song->premiere->format('Y-m-d'),
-            'duration' => $song->duration->format('H:i:s'),
-            'author' => [
-                'nickname' => $song->author->nickname,
-            ],
-            'genres' => $song->genres->map(function($genre) {
-                return [
-                    'type' => $genre->type,
-                ];
-            }),
-        ]);
+        return response()->json($song);
     }
     public function edit(Song $song) //GET
     {}
     public function update(Request $request, Song $song) //PUT, PATCH
-    {}
+    {
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:30',
+            'description' => 'required|string|max:60',
+            'premiere' => 'required|date',
+            'duration' => 'required|date_format:H:i:s',
+            'author_id' => 'required|exists:authors,id',
+            'url' => 'required|string|max:255',
+            'genres' => 'required|array',
+            'genres.*' => 'exists:genres,id',
+        ]);
+        $song->update($validatedData);
+        $song->genres()->sync($request->input('genres'));
+        return redirect()->route('spotifys.index')->with('success', 'Song updated successfully!');
+    }
     public function destroy(Song $song) //DELETE
-    {}
+    {
+        $song->genres()->detach();
+        $song->delete();
+        return redirect()->route('spotifys.index')->with('success','Song delete successful!');
+    }
 }

@@ -5,7 +5,6 @@
         <form id="editForm" method="POST" action="{{ old('author_id') ? route('authors.update', old('author_id')) : route('authors.store') }}">
             @csrf
             <input type="hidden" name="_method" id="_method" value="{{ old('author_id') ? 'PUT' : 'POST' }}">
-            <!-- Aquí siguen los campos del formulario -->
             <div class="mb-4">
                 <label for="nickname" class="block text-sm font-medium">Nickname</label>
                 <input type="text" placeholder="Enter nickname for author" name="nickname" id="nickname" value="{{ old('nickname') }}" class="Input" required maxlength="30" autofocus>
@@ -128,7 +127,6 @@
     function openSongModal() {
         document.getElementById('songModal').classList.remove('hidden');
     }
-
     function closeSongModal() {
         document.getElementById('songModal').classList.add('hidden');
     }

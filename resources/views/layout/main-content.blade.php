@@ -38,6 +38,14 @@
                 <div class="text-center">
                     <img src="{{$song->url}}" alt="{{ $song->title }}" class="rounded-full h-24 w-24 mx-auto mb-2" onclick="showSSongModal({{$song->id}})">
                     <p>{{ $song->title }}</p>
+                    <button id="edit-{{$song->id}}" class="Add" onclick="openSongModal({{$author->id}})">&#10000;</button>
+                        <form action="{{route('songs.destroy', $song -> id)}}" method="post" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="Add">
+                                &#8861;
+                            </button>
+                        </form>
                 </div>
             @endforeach
             </div>
