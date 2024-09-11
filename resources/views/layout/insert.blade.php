@@ -1,4 +1,4 @@
-<!--this is for author create-->
+<!--this is for author create and edit (upgrade)-->
 <div id="authorModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
     <div class="Modal">
         <h2 class="text-xl font-bold mb-4">Add New Author</h2>
@@ -20,12 +20,13 @@
         </form>
     </div>
 </div>
-<!--this is for song create-->
+<!--this is for song create and edit (upgrade)-->
 <div id="songModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
     <div class="Modal">
         <h2 class="text-xl font-bold mb-4">Add New Song</h2>
-        <form action="{{ route('songs.store') }}" method="POST">
+        <form id="songForm" method="POST" action="{{ route('songs.store') }}">
             @csrf
+            <input type="hidden" name="_method" id="_method" value="{{ old('song_id') ? 'PUT' : 'POST' }}">
             <div class="mb-4">
                 <label for="title" class="block text-sm font-medium">Title</label>
                 <input type="text" name="title" id="title" class="Input" required maxlength="30">
@@ -124,8 +125,36 @@
         }
     }
     //this is for song modal
-    function openSongModal() {
-        document.getElementById('songModal').classList.remove('hidden');
+    var songs = @json($songs);
+    function openSongModal(id = null) {
+        const songForm = document.getElementById('songForm');
+        if (id) {
+            // Get the song with their ID from the global song list
+            const song = songs.find(song => song.id === id);
+            // Ensure fields are filled out correctly
+            document.getElementById('title').value = song.title;
+            document.getElementById('description').value = song.description;
+            document.getElementById('url').value = song.url;
+            document.getElementById('premiere').value = song.premiere;
+            document.getElementById('duration').value = song.duration;
+            document.getElementById('author_id').value = song.author_id;
+            // Configure the action and method for editing
+            songForm.action = `/songs/${id}`;
+            document.getElementById('songModal').classList.remove('hidden');
+            songForm._method.value = 'PUT';  // Ensures that the PUT method is done
+        } else {
+            // Clear fields to create a new song
+            document.getElementById('title').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('url').value = '';
+            document.getElementById('premiere').value = '';
+            document.getElementById('duration').value = '';
+            document.getElementById('author_id').value = '';
+            // Configure the action to create a new song
+            songForm.action = '{{ route('songs.store') }}';
+            document.getElementById('songModal').classList.remove('hidden');
+            songForm._method.value = 'POST';  // Ensures that the POST method is done
+        }
     }
     function closeSongModal() {
         document.getElementById('songModal').classList.add('hidden');
