@@ -2,7 +2,7 @@
 <div id="sAuthorModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
     <div class="Modal">
         <h2 id="authorName" class="text-xl font-bold mb-4"></h2>
-        <h1 class="font-bold">Canciones relacionadas</h1>
+        <h1 class="font-bold">Songs</h1>
         <ul id="authorSongs"></ul>
         <div class="flex justify-end mt-6">
             <button class="Cancel" onclick="closeSAuthorModal()">Close</button>

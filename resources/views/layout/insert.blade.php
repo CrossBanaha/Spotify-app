@@ -2,7 +2,7 @@
 <div id="authorModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
     <div class="Modal">
         <h2 class="text-xl font-bold mb-4">Add New Author</h2>
-        <form id="editForm" method="POST" action="{{ old('author_id') ? route('authors.update', old('author_id')) : route('authors.store') }}">
+        <form id="editForm" method="POST" action="{{ route('authors.store') }}">
             @csrf
             <input type="hidden" name="_method" id="_method" value="{{ old('author_id') ? 'PUT' : 'POST' }}">
             <div class="mb-4">
