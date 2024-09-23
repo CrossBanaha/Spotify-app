@@ -11,15 +11,15 @@ class AuthorController extends Controller
     public function store(Request $request) //POST
     {
         $validatedData = $request->validate([
-            'nickname' => 'required|string|max:30',
-            'url' => 'required|string|max:255'
+            'nickname' => 'required|string|min:2|max:30',
+            'url' => 'required|string|min:10|max:255'
         ]);
         Author::create($validatedData);
         return redirect()->route('spotifys.index')->with('success', 'Author created successfully!');
     }
     public function show(Author $author) //GET
     {
-        $author = Author::with('songs')->find($author->id);
+        $author = $author->load('songs');
         if (!$author) {
             return response()->json(['error' => 'Author not found'], 404);
         }

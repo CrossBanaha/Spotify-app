@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class SongController extends Controller
 {
@@ -40,7 +39,7 @@ class SongController extends Controller
             'title' => 'required|string|max:30',
             'description' => 'required|string|max:60',
             'premiere' => 'required|date',
-            'duration' => 'required|date_format:H:i:s',
+            'duration' => 'required|date_format:i:s',
             'author_id' => 'required|exists:authors,id',
             'url' => 'required|string|max:255',
             'genres' => 'required|array',
