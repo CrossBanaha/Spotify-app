@@ -29,8 +29,7 @@ class SongController extends Controller
     }
     public function show(Song $song) //GET
     {
-        $song = $song->load('author', 'genres');
-        return response()->json($song);
+        return view('song.show', compact('song'));
     }
     public function edit(Song $song) //GET
     {}

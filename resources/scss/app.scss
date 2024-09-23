@@ -11,6 +11,9 @@ body {
     }
     main {
         @apply bg-customSubBase text-white rounded-[15px];
+        .submain {
+            @apply px-[20px] py-[1px];
+        }
     }
 }
 .up {
@@ -85,5 +88,8 @@ body {
     @apply mt-1 p-2 w-full border rounded-md text-black;
 }
 .genresExpo {
-    @apply text-center bg-customBase border-2 rounded-md;
+    @apply text-center;
+    p {
+        @apply bg-customBase border-2 rounded-md;
+    }
 }

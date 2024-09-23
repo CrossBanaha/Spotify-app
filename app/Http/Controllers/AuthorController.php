@@ -19,14 +19,7 @@ class AuthorController extends Controller
     }
     public function show(Author $author) //GET
     {
-        $author = Author::with('songs')->find($author->id);
-        if (!$author) {
-            return response()->json(['error' => 'Author not found'], 404);
-        }
-        return response()->json([
-            'nickname' => $author->nickname,
-            'songs' => $author->songs
-        ]);
+        return view('author.show', compact('author'));
     }
     public function edit(Author $author) //GET
     {}

@@ -4,5 +4,4 @@
 @section('content')
     @include('layout.main-content')
     @include('layout.insert')
-    @include('layout.show')
 @endsection

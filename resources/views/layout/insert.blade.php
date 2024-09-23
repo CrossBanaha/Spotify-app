@@ -1,29 +1,35 @@
 <!--this is for author create and edit (upgrade)-->
-<div id="authorModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
+<div id="authorModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center {{$errors->any() ? '' : 'hidden'}}">
     <div class="Modal">
-        <h2 class="text-xl font-bold mb-4">Add New Author</h2>
+        <h2 class="text-xl font-bold mb-4">{{ $errors->any() ? 'Edit Author' : 'Add New Author' }}</h2>
         <form id="editForm" method="POST" action="{{ old('author_id') ? route('authors.update', old('author_id')) : route('authors.store') }}">
             @csrf
             <input type="hidden" name="_method" id="_method" value="{{ old('author_id') ? 'PUT' : 'POST' }}">
             <div class="mb-4">
                 <label for="nickname" class="block text-sm font-medium">Nickname</label>
-                <input type="text" placeholder="Enter nickname for author" name="nickname" id="nickname" value="{{ old('nickname') }}" class="Input" required maxlength="30" autofocus>
+                <input type="text" placeholder="Enter nickname for author" name="nickname" id="nickname" value="{{ old('nickname') }}" class="Input" required minlength="2" maxlength="30" autofocus>
+                @error('nickname')
+                    <div class="text-red-500 border-red-600">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="url" class="block text-sm font-medium">URL</label>
                 <input type="text" placeholder="Enter url for author image" name="url" id="url" value="{{ old('url') }}" class="Input" required maxlength="255">
+                @error('url')
+                    <div class="text-red-500 border-red-600">{{ $message }}</div>
+                @enderror
             </div>
             <div class="flex justify-end">
                 <button type="button" class="Cancel" onclick="closeAuthorModal()">Cancel</button>
-                <button type="submit" class="Add">Save Author</button>
+                <button type="submit" class="Add">{{ $errors->any() ? 'Edit' : 'Add' }} Author</button>
             </div>
         </form>
     </div>
 </div>
 <!--this is for song create and edit (upgrade)-->
-<div id="songModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
+<div id="songModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center {{$errors->any() ? '' : 'hidden'}}">
     <div class="Modal">
-        <h2 class="text-xl font-bold mb-4">Add New Song</h2>
+        <h2 class="text-xl font-bold mb-4">{{ $errors->any() ? 'Edit Song' : 'Add New Song' }}</h2>
         <form id="songForm" method="POST" action="{{ route('songs.store') }}">
             @csrf
             <input type="hidden" name="_method" id="_method" value="{{ old('song_id') ? 'PUT' : 'POST' }}">
@@ -68,7 +74,7 @@
             </div>
             <div class="flex justify-end">
                 <button type="button" class="Cancel" onclick="closeSongModal()">Cancel</button>
-                <button type="submit" class="Add">Add Song</button>
+                <button type="submit" class="Add">{{ $errors->any() ? 'Edit' : 'Add' }} Song</button>
             </div>
         </form>
     </div>
