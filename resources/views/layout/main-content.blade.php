@@ -25,7 +25,7 @@
                             <form action="{{route('authors.destroy', $author -> id)}}" method="post" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="Add">
+                                <button class="Add" onclick="showFlashMessage('delete successful')">
                                     &#8861;
                                 </button>
                             </form>
@@ -47,7 +47,7 @@
                             <form action="{{route('songs.destroy', $song -> id)}}" method="post" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="Add">
+                                <button class="Add" onclick="showFlashMessage('delete successful')">
                                     &#8861;
                                 </button>
                             </form>
@@ -65,13 +65,6 @@
                             <p>{{ $genre->type }}</p>
                             <a href="{{ route('genres.show', $genre->id) }}" class="Add">View</a>
                             <button id="edit-{{$genre->id}}" class="Add" onclick="openGenreModal({{$genre->id}})">&#10000;</button>
-                            <form action="{{route('genres.destroy', $song -> id)}}" method="post" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button class="Add">
-                                    &#8861;
-                                </button>
-                            </form>
                         </div>
                     @endforeach
                 </div>

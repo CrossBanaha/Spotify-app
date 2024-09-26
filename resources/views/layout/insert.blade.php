@@ -97,29 +97,36 @@
     </div>
 </div>
 <script>
+    function showFlashMessage(message) {
+        showFlash(message);
+    }
     //this is for author modal
     var authors = @json($authors);
     function openAuthorModal(id = null) {
         const editForm = document.getElementById('editForm');
         if (id) {
-            //Get the author with their ID from the global author list
             const author = authors.find(author => author.id === id);
-            //Ensure fields are filled out correctly
             document.getElementById('nickname').value = author.nickname;
             document.getElementById('url').value = author.url;
-            //Configure the action and method for editing
             editForm.action = `/authors/${id}`;
             document.getElementById('authorModal').classList.remove('hidden');
-            editForm._method.value = 'PUT';  //Ensures that the PUT method is done
+            editForm._method.value = 'PUT';
         } else {
-            //Clear fields to create a new author
             document.getElementById('nickname').value = '';
             document.getElementById('url').value = '';
-            //Configure the action to create a new author
             editForm.action = '{{ route('authors.store') }}';
             document.getElementById('authorModal').classList.remove('hidden');
-            editForm._method.value = 'POST';  //Ensures that the POST method is done
+            editForm._method.value = 'POST';
         }
+        document.getElementById('editForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('editForm').submit();
+            closeAuthorModal();
+            showFlashMessage('add successful');
+            setTimeout(function() {
+                document.getElementById('flashModal').classList.add('hidden');
+            }, 3000);
+        });
     }
     function closeAuthorModal() {
         document.getElementById('authorModal').classList.add('hidden');
@@ -135,32 +142,36 @@
     function openSongModal(id = null) {
         const songForm = document.getElementById('songForm');
         if (id) {
-            // Get the song with their ID from the global song list
             const song = songs.find(song => song.id === id);
-            // Ensure fields are filled out correctly
             document.getElementById('title').value = song.title;
             document.getElementById('description').value = song.description;
             document.getElementById('url').value = song.url;
             document.getElementById('premiere').value = song.premiere;
             document.getElementById('duration').value = song.duration;
             document.getElementById('author_id').value = song.author_id;
-            // Configure the action and method for editing
             songForm.action = `/songs/${id}`;
             document.getElementById('songModal').classList.remove('hidden');
-            songForm._method.value = 'PUT';  // Ensures that the PUT method is done
+            songForm._method.value = 'PUT';
         } else {
-            // Clear fields to create a new song
             document.getElementById('title').value = '';
             document.getElementById('description').value = '';
             document.getElementById('url').value = '';
             document.getElementById('premiere').value = '';
             document.getElementById('duration').value = '';
             document.getElementById('author_id').value = '';
-            // Configure the action to create a new song
             songForm.action = '{{ route('songs.store') }}';
             document.getElementById('songModal').classList.remove('hidden');
-            songForm._method.value = 'POST';  // Ensures that the POST method is done
+            songForm._method.value = 'POST';
         }
+        document.getElementById('songForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('songForm').submit();
+            closeSongModal();
+            showFlashMessage('add successful');
+            setTimeout(function() {
+                document.getElementById('flashModal').classList.add('hidden')
+            }, 3000);
+        });
     }
     function closeSongModal() {
         document.getElementById('songModal').classList.add('hidden');
@@ -174,6 +185,15 @@
     //this is for genre modal
     function openGenreModal() {
         document.getElementById('genreModal').classList.remove('hidden');
+        document.getElementById('genreModal').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('genreModal').submit();
+            closeGenrerModal();
+            showFlashMessage('add successful');
+            setTimeout(function() {
+                document.getElementById('flashModal').classList.add('hidden')
+            }, 3000);
+        });
     }
     function closeGenreModal() {
         document.getElementById('genreModal').classList.add('hidden');
