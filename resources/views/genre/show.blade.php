@@ -17,4 +17,7 @@
                 <h1>{{ $genre->type }}</h1>
             </section>
         </div>
+        <a href="{{ route('genres.edit', $genre->id) }}" id="edit-{{$genre->id}}" class="Add">&#10000;</a>
+    </main>
+</div>
 @endsection

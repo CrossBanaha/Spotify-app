@@ -27,4 +27,12 @@
                 </ul>
             </section>
         </div>
+        <a href="{{ route('songs.edit', $song->id) }}" id="edit-{{$song->id}}" class="Add">&#10000;</a>
+        <form action="{{route('songs.destroy', $song -> id)}}" method="post" class="inline">
+            @csrf
+            @method('DELETE')
+            <button class="Add" onclick="showFlashMessage('delete successful')">
+                &#8861;
+            </button>
+        </form>
 @endsection

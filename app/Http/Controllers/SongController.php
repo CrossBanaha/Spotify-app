@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Song;
+use App\Models\Author;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class SongController extends Controller
@@ -10,7 +12,11 @@ class SongController extends Controller
     public function index() //GET
     {}
     public function create() //GET
-    {}
+    {
+        $authors = Author::all();
+        $genres = Genre::all();
+        return view('song.insert', compact('authors','genres'));
+    }
     public function store(Request $request) //POST
     {
         $validatedData = $request->validate([
@@ -32,7 +38,11 @@ class SongController extends Controller
         return view('song.show', compact('song'));
     }
     public function edit(Song $song) //GET
-    {}
+    {
+        $authors = Author::all();
+        $genres = Genre::all();
+        return view('song.insert', compact('song', 'authors', 'genres'));
+    }
     public function update(Request $request, Song $song) //PUT, PATCH
     {
         $validatedData = $request->validate([

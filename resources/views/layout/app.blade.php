@@ -11,7 +11,6 @@
     <body>
         <div class=" grid grid-cols-8 gap-x-7">
             @include('layout.sidebar')
-            @include('layout.flash')
             @yield('content')
         </div>
     </body>

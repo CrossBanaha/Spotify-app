@@ -7,7 +7,9 @@ class AuthorController extends Controller
     public function index() //GET
     {}
     public function create() //GET
-    {}
+    {
+        return view('author.insert');
+    }
     public function store(Request $request) //POST
     {
         $validatedData = $request->validate([
@@ -22,7 +24,9 @@ class AuthorController extends Controller
         return view('author.show', compact('author'));
     }
     public function edit(Author $author) //GET
-    {}
+    {
+        return view('author.insert', compact('author'));
+    }
     public function update(Request $request, Author $author) //PUT, PATCH
     {
         $validatedData = $request->validate([

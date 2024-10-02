@@ -1,4 +1,4 @@
-<div>
+<div class>
     <div class="up">
         <div>
             <img src="{{ asset('/images/spotify-icon.png') }}">
