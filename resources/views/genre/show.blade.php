@@ -1,23 +1,19 @@
-@extends('layout.app')
-@section('content')
-<div class="content col-span-7">
-    <main>
-        <header>
-            <div class="direction">
-                <button id="before" class="Before"><</button>
-                <button id="after" class="After">></button>
-            </div>
-            <div class="Account">
-                <button id="register" class="Register">Register</button>
-                <button id="login" class="Login">Login</button>
-            </div>
-        </header>
-        <div class="submain">
-            <section class="mb-8">
-                <h1>{{ $genre->type }}</h1>
-            </section>
+@extends('layout.base')
+@section('show-content')
+    <section class="mb-8">
+        <h1>{{ $genre->type }}</h1>
+        <div class="btn-right">
+            <a href="{{ route('spotifys.index') }}" class="btn-gray px-[15px] py-[5px] m-1">Return</a>
+            <form action="{{ route('genres.destroy', $genre->id) }}" method="post" class="inline">
+                @csrf
+                @method('DELETE')
+                <button class="btn-white px-[15px] py-[5px] hover:px-[16px] m-1">
+                    &#8861;
+                </button>
+            </form>
+            <a href="{{ route('genres.edit', $genre->id) }}" id="edit-{{$genre->id}}" class="btn-white px-[15px] py-[5px] hover:px-[16px] m-1">
+                &#10000;
+            </a>
         </div>
-        <a href="{{ route('genres.edit', $genre->id) }}" id="edit-{{$genre->id}}" class="Add">&#10000;</a>
-    </main>
-</div>
+    </section>
 @endsection

@@ -9,7 +9,7 @@
         <title>@yield('title', 'Spotify')</title>
     </head>
     <body>
-        <div class=" grid grid-cols-8 gap-x-7">
+        <div class=" grid grid-cols-8 gap-x-5">
             @include('layout.sidebar')
             @yield('content')
         </div>
