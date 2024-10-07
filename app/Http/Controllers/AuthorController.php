@@ -13,15 +13,15 @@ class AuthorController extends Controller
     public function store(Request $request) //POST
     {
         $validatedData = $request->validate([
-            'nickname' => 'required|string|max:30',
-            'url' => 'required|string|max:255'
+            'nickname' => 'required|string|max:30'
         ]);
         Author::create($validatedData);
         return redirect()->route('spotifys.index')->with('success', 'Author created successfully!');
     }
     public function show(Author $author) //GET
     {
-        return view('author.show', compact('author'));
+        $next_direction = 'authors.create';
+        return view('author.show', compact('author', 'next_direction'));
     }
     public function edit(Author $author) //GET
     {
@@ -30,8 +30,7 @@ class AuthorController extends Controller
     public function update(Request $request, Author $author) //PUT, PATCH
     {
         $validatedData = $request->validate([
-            'nickname' => 'required|string|max:30',
-            'url' => 'required|string|max:255'
+            'nickname' => 'required|string|max:30'
         ]);
         $author->update($validatedData);
         return redirect()->route('spotifys.index')->with('success', 'Author updated successfully!');

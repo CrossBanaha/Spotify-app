@@ -6,7 +6,7 @@
             <button class="btn-gray p-[5px]">Search</button>
         </div>
     </div>
-    <div class="sidebar h-[60%]">
+    <div class="sidebar min-h-[60%]">
         <button class="btn-gray p-[5px]">Your Library</button>
         <div class="mini-box">
             <h1>Create your first list</h1>

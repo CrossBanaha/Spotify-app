@@ -11,8 +11,8 @@ return new class extends Migration {
     {
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
-            $table->string('url');
             $table->string('title',30);
+            $table->string('url')->nullable();
             $table->string('description',60)->nullable();
             $table->date('premiere');
             $table->time('duration',2);

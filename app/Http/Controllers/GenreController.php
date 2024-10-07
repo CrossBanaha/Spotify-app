@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    public function index()
+    public function index() //GET
     {}
-    public function create()
+    public function create() //GET
     {
         return view('genre.insert');
     }
-    public function store(Request $request)
+    public function store(Request $request) //POST
     {
         $validatedData = $request->validate([
             'type' => 'required|string|max:30'
@@ -21,15 +21,15 @@ class GenreController extends Controller
         Genre::create($validatedData);
         return redirect()->route('spotifys.index')->with('success', 'Genre created successfully!');
     }
-    public function show(Genre $genre)
+    public function show(Genre $genre) //GET
     {
         return view('genre.show', compact('genre'));
     }
-    public function edit(Genre $genre)
+    public function edit(Genre $genre) //GET
     {
         return view('genre.insert', compact('genre'));
     }
-    public function update(Request $request, Genre $genre)
+    public function update(Request $request, Genre $genre) //PUT, PATCH
     {
         $validatedData = $request->validate([
             'type' => 'required|string|max:30'
@@ -37,7 +37,7 @@ class GenreController extends Controller
         $genre->update($validatedData);
         return redirect()->route('spotifys.index')->with('success', 'Genre updated successfully!');
     }
-    public function destroy(Genre $genre)
+    public function destroy(Genre $genre) //DELETE
     {
         $genre->delete();
         return redirect()->route('spotifys.index')->with('success', 'Genre deleted successfully!');

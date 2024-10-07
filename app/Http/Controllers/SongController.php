@@ -21,11 +21,9 @@ class SongController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:30',
-            'description' => 'required|string|max:60',
             'premiere' => 'required|date',
             'duration' => 'required|date_format:H:i:s',
             'author_id' => 'required|exists:authors,id',
-            'url' => 'required|string|max:255',
             'genres' => 'required|array',
             'genres.*' => 'exists:genres,id',
         ]);
@@ -47,11 +45,9 @@ class SongController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:30',
-            'description' => 'required|string|max:60',
             'premiere' => 'required|date',
             'duration' => 'required|date_format:H:i:s',
             'author_id' => 'required|exists:authors,id',
-            'url' => 'required|string|max:255',
             'genres' => 'required|array',
             'genres.*' => 'exists:genres,id',
         ]);

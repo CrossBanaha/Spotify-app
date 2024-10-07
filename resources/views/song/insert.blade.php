@@ -37,7 +37,7 @@
             </div>
             <div class="mb-4">
                 <label for="duration" class="block text-sm font-medium">Duration (MM:SS)</label>
-                <input type="time" name="duration" id="duration" value="{{ old('duration', $song->duration ?? '') }}" class="Input" step="1" max="00:59:59" autofocus>
+                <input type="time" name="duration" id="duration" value="{{ old('duration', $song->duration ?? '') }}" class="Input" step="1" max="59:59" autofocus>
                 @error('duration')
                     <div class="error">{{ $message }}</div>
                 @enderror
