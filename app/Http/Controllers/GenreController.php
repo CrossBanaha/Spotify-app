@@ -19,6 +19,7 @@ class GenreController extends Controller
             'type' => 'required|string|max:30'
         ]);
         Genre::create($validatedData);
+        session()->flash('modal_message', 'Genre created successfully!');
         return redirect()->route('spotifys.index')->with('success', 'Genre created successfully!');
     }
     public function show(Genre $genre) //GET
@@ -35,11 +36,13 @@ class GenreController extends Controller
             'type' => 'required|string|max:30'
         ]);
         $genre->update($validatedData);
+        session()->flash('modal_message', 'Genre updated successfully!');
         return redirect()->route('spotifys.index')->with('success', 'Genre updated successfully!');
     }
     public function destroy(Genre $genre) //DELETE
     {
         $genre->delete();
+        session()->flash('modal_message', 'Genre delete successfully!');
         return redirect()->route('spotifys.index')->with('success', 'Genre deleted successfully!');
     }
 }

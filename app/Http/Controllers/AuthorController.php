@@ -16,6 +16,7 @@ class AuthorController extends Controller
             'nickname' => 'required|string|max:30'
         ]);
         Author::create($validatedData);
+        session()->flash('modal_message', 'Author created successfully!');
         return redirect()->route('spotifys.index')->with('success', 'Author created successfully!');
     }
     public function show(Author $author) //GET
@@ -33,11 +34,13 @@ class AuthorController extends Controller
             'nickname' => 'required|string|max:30'
         ]);
         $author->update($validatedData);
+        session()->flash('modal_message', 'Author updated successfully!');
         return redirect()->route('spotifys.index')->with('success', 'Author updated successfully!');
     }
     public function destroy(Author $author) //DELETE
     {
         $author->delete();
+        session()->flash('modal_message', 'Author deleted successfully!');
         return redirect()->route('spotifys.index')->with('success', 'Author deleted successfully!');
     }
 }

@@ -29,6 +29,7 @@ class SongController extends Controller
         ]);
         $song = Song::create($validatedData);
         $song->genres()->sync($request->input('genres'));
+        session()->flash('modal_message', 'Song created successfully!');
         return redirect()->route('spotifys.index')->with('success', 'Song created successfully!');
     }
     public function show(Song $song) //GET
@@ -53,12 +54,14 @@ class SongController extends Controller
         ]);
         $song->update($validatedData);
         $song->genres()->sync($request->input('genres'));
+        session()->flash('modal_message', 'Song updated successfully!');
         return redirect()->route('spotifys.index')->with('success', 'Song updated successfully!');
     }
     public function destroy(Song $song) //DELETE
     {
         $song->genres()->detach();
         $song->delete();
+        session()->flash('modal_message', 'Song delete successfully!');
         return redirect()->route('spotifys.index')->with('success','Song delete successful!');
     }
 }
