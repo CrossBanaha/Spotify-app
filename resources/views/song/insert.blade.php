@@ -16,28 +16,28 @@
             </div>
             <div class="mb-4">
                 <label for="description" class="block text-sm font-medium">Description</label>
-                <input type="text" name="description" value="{{ old('description', $song->description ?? '') }}" class="Input" autofocus>
+                <input type="text"placeholder="Enter description for song (optional)" name="description" value="{{ old('description', $song->description ?? '') }}" class="Input" autofocus>
                 @error('description')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-4">
                 <label for="url" class="block text-sm font-medium">URL</label>
-                <input type="text" name="url" id="url" value="{{ old('url', $song->url ?? '') }}" class="Input" autofocus>
+                <input type="text" placeholder="Enter url for song" name="url" id="url" value="{{ old('url', $song->url ?? '') }}" class="Input" autofocus>
                 @error('url')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-4">
                 <label for="premiere" class="block text-sm font-medium">Premiere Date</label>
-                <input type="date" name="premiere" id="premiere" value="{{ old('premiere', $song->premiere ?? '') }}" class="Input" autofocus>
+                <input type="date" placeholder="Enter premiere for song" name="premiere" id="premiere" value="{{ old('premiere', $song->premiere ?? '') }}" class="Input" autofocus>
                 @error('premiere')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-4">
                 <label for="duration" class="block text-sm font-medium">Duration (MM:SS)</label>
-                <input type="time" name="duration" id="duration" value="{{ old('duration', $song->duration ?? '') }}" class="Input" step="1" max="59:59" autofocus>
+                <input type="time" placeholder="Enter duration for song" name="duration" id="duration" value="{{ old('duration', $song->duration ?? '') }}" class="Input" step="1" max="59:59" autofocus>
                 @error('duration')
                     <div class="error">{{ $message }}</div>
                 @enderror
@@ -61,11 +61,11 @@
                         <input type="checkbox" value="{{ $genre->id }}" id="genres" name="genres[]" 
                         @if (old('genres') && in_array($genre->id, old('genres'))) checked @endif>
                             {{ $genre->type }}
-                        @error('genres')
-                            <div class="error">{{ $message }}</div>
-                        @enderror
                     </label>
                 @endforeach
+                @error('genres')
+                    <div class="error">{{ $message }}</div>
+                @enderror
             </div>
             <div class="flex justify-end">
                 <a href="{{ route('spotifys.index') }}" class="btn-gray px-[15px] py-[5px] m-1">Cancel</a>

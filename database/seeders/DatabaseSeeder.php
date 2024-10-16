@@ -42,49 +42,82 @@ class DatabaseSeeder extends Seeder
         $songsData = [
             [
                 'title' => 'Song One',
-                'url' => 'https://song1.com'
+                'url' => 'https://song1.com',
+                'description' => 'one song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
             [
                 'title' => 'Song Two',
-                'url' => 'https://song2.com'
+                'url' => 'https://song2.com',
+                'description' => 'two song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
             [
                 'title' => 'Song Three',
-                'url' => 'https://song3.com'
+                'url' => 'https://song3.com',
+                'description' => 'three song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
             [
                 'title' => 'Song Four',
-                'url' => 'https://song4.com'
+                'url' => 'https://song4.com',
+                'description' => 'four song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
             [
                 'title' => 'Song Five',
-                'url' => 'https://song5.com'
+                'url' => 'https://song5.com',
+                'description' => 'five song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
             [
                 'title' => 'Song Six',
-                'url' => 'https://song6.com'
+                'url' => 'https://song6.com',
+                'description' => 'six song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
             [
                 'title' => 'Song Seven',
-                'url' => 'https://song7.com'
+                'url' => 'https://song7.com',
+                'description' => 'seven song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
             [
                 'title' => 'Song Eight',
-                'url' => 'https://song8.com'
+                'url' => 'https://song8.com',
+                'description' => 'eight song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
             [
                 'title' => 'Song Nine',
-                'url' => 'https://song9.com'
+                'url' => 'https://song9.com',
+                'description' => 'nine song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
             [
                 'title' => 'Song Ten',
-                'url' => 'https://song10.com'
+                'url' => 'https://song10.com',
+                'description' => 'ten song',
+                'premiere' => '04-04-2004',
+                'duration' => '00:02:14'
             ],
         ];
         collect($songsData)->each(function ($data) use ($authors, $genres) {
             Song::factory()->create([
                 'title' => $data['title'],
                 'url' => $data['url'],
+                'description' => $data['description'],
+                'premiere' => $data['premiere'],
+                'duration' => $data['duration'],
                 'author_id' => $authors->random()->id,
                 'genre_id' => $genres->random()->id,
             ]);

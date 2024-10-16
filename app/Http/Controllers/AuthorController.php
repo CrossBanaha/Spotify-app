@@ -6,10 +6,12 @@ class AuthorController extends Controller
 {
     public function index() //GET
     {}
+
     public function create() //GET
     {
         return view('author.insert');
     }
+
     public function store(Request $request) //POST
     {
         $validatedData = $request->validate([
@@ -17,17 +19,21 @@ class AuthorController extends Controller
         ]);
         Author::create($validatedData);
         session()->flash('modal_message', 'Author created successfully!');
+        session()->flash('modal_type', 'success');
         return redirect()->route('spotifys.index')->with('success', 'Author created successfully!');
     }
+
     public function show(Author $author) //GET
     {
         $next_direction = 'authors.create';
         return view('author.show', compact('author', 'next_direction'));
     }
+
     public function edit(Author $author) //GET
     {
         return view('author.insert', compact('author'));
     }
+
     public function update(Request $request, Author $author) //PUT, PATCH
     {
         $validatedData = $request->validate([
@@ -35,12 +41,15 @@ class AuthorController extends Controller
         ]);
         $author->update($validatedData);
         session()->flash('modal_message', 'Author updated successfully!');
+        session()->flash('modal_type', 'update');
         return redirect()->route('spotifys.index')->with('success', 'Author updated successfully!');
     }
+
     public function destroy(Author $author) //DELETE
     {
         $author->delete();
         session()->flash('modal_message', 'Author deleted successfully!');
+        session()->flash('modal_type', 'delete');
         return redirect()->route('spotifys.index')->with('success', 'Author deleted successfully!');
     }
 }
